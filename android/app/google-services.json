@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "486335990588",
+    "firebase_url": "https://food-app-afe4f-default-rtdb.firebaseio.com",
+    "project_id": "food-app-afe4f",
+    "storage_bucket": "food-app-afe4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486335990588:android:cb1148e25543379ca56c39",
+        "android_client_info": {
+          "package_name": "com.example.food_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmVn9t8rmubjaI_wwdqD0nH2IqYA9S37Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
