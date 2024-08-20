@@ -96,7 +96,7 @@ class FoodModel extends FoodEntitie {
   }) : super(
             foodImage: image ?? '',
             name: recipe!,
-            price: Random().nextInt(200) + 50,
+            price: Random().nextInt(100) + 50,
             Rating: Random().nextDouble() * 4 + 1.0,
             carbs: carbohydratesInGrams ?? 0,
             description: recipe,
@@ -110,6 +110,7 @@ class FoodModel extends FoodEntitie {
             ],
             fats: fatInGrams ?? 0,
             number: 1,
+            foodId: id!,
             proteins: proteinInGrams ?? 0);
 
   factory FoodModel.fromJson(Map<String, dynamic> json) => FoodModel(

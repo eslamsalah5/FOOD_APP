@@ -28,6 +28,8 @@ class FoodEntitie extends HiveObject {
   final num carbs;
   @HiveField(11)
   int number;
+  @HiveField(12)
+  final num foodId;
 
   FoodEntitie({
     required this.foodImage,
@@ -42,5 +44,6 @@ class FoodEntitie extends HiveObject {
     required this.fats,
     required this.carbs,
     required this.number,
+    required this.foodId,
   });
 }

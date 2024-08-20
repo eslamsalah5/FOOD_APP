@@ -112,13 +112,15 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('orders')
-          .add({
+          .doc(foodEntitie.foodId.toString())
+          .set({
         'name': foodEntitie.name,
         'price': foodEntitie.price,
         'image': foodEntitie.foodImage,
         'quantity': foodEntitie.number,
         'total': foodEntitie.price * foodEntitie.number,
         'rating': foodEntitie.Rating,
+        'id': foodEntitie.foodId,
       });
     } on Exception catch (e) {
       print(e.toString());

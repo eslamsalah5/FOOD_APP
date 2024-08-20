@@ -4,4 +4,6 @@ import 'package:food_app/features/order/data/models/orders_model.dart';
 
 abstract class OrderRepo {
   Future<Either<Failures, List<OrderModel>>> fetchOrders();
+
+  Future<Either<Failures, void>> deleteOrder({required num orderId});
 }
