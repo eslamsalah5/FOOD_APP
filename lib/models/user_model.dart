@@ -5,8 +5,9 @@ class UserModel {
   final String? uId;
   final bool? isEmailVerified;
   final num? totalPrice;
-
+  final String? customerId;
   UserModel({
+    required this.customerId,
     required this.userName,
     required this.email,
     required this.phone,
@@ -23,6 +24,7 @@ class UserModel {
       uId: map['uId'],
       isEmailVerified: map['isEmailVerified'],
       totalPrice: map['totalPrice'],
+      customerId: map['customerId'],
     );
   }
 
@@ -34,6 +36,7 @@ class UserModel {
       'uId': uId,
       'isEmailVerified': isEmailVerified,
       'totalPrice': totalPrice,
+      'customerId': customerId,
     };
   }
 }

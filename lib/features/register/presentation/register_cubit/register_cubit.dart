@@ -62,6 +62,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         userName: userName,
         isEmailVerified: false,
         totalPrice: 0,
+        customerId: '',
       );
       await FirebaseFirestore.instance
           .collection('users')
