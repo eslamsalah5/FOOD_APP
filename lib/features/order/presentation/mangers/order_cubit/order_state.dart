@@ -18,3 +18,13 @@ final class OrderError extends OrderState {
 
   OrderError({required this.message});
 }
+
+final class DeleteOrderLoading extends OrderState {}
+
+final class DeleteOrderSuccess extends OrderState {}
+
+final class DeleteOrderError extends OrderState {
+  final String message;
+
+  DeleteOrderError({required this.message});
+}

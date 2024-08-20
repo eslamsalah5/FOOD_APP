@@ -29,6 +29,7 @@ class FoodEntitieAdapter extends TypeAdapter<FoodEntitie> {
       fats: fields[9] as num,
       carbs: fields[10] as num,
       number: fields[11] as int,
+      foodId: fields[12] as num,
     );
   }
 

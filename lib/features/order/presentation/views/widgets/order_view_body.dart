@@ -73,7 +73,9 @@ class OrderViewBody extends StatelessWidget {
                       List<OrderModel> orders = state.orders;
 
                       // Calculate total price
-                      double totalPrice = orders.fold(
+                      double totalPrice = 0;
+
+                      totalPrice = orders.fold(
                           0,
                           (previousValue, order) =>
                               previousValue + order.total);

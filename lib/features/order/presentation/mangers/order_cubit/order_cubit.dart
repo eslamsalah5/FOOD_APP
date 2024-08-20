@@ -19,4 +19,14 @@ class OrderCubit extends Cubit<OrderState> {
       emit(OrderSuccess(orders: orders));
     });
   }
+
+  Future<void> deleteOrder({required num orderId}) async {
+    emit(DeleteOrderLoading());
+    final orders = await orderRepo.deleteOrder(orderId: orderId);
+    orders.fold((failure) {
+      emit(DeleteOrderError(message: failure.errorMessage));
+    }, (orders) {
+      emit(DeleteOrderSuccess());
+    });
+  }
 }
