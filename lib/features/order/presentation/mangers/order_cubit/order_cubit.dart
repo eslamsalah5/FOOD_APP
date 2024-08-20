@@ -19,6 +19,4 @@ class OrderCubit extends Cubit<OrderState> {
       emit(OrderSuccess(orders: orders));
     });
   }
-
-  
 }

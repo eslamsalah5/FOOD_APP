@@ -59,7 +59,10 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
                     int totalAmountInCents = (totalPrice).toInt();
                     PaymentIntentInputModel paymentIntentInputModel =
                         PaymentIntentInputModel(
-                            amount: '$totalAmountInCents', currency: 'USD');
+                      amount: '$totalAmountInCents',
+                      currency: 'USD',
+                      customerId: 'cus_Qh6vRVjmRDqzQD',
+                    );
                     BlocProvider.of<PaymentCubit>(context).makePayment(
                       paymentIntentInputModel: paymentIntentInputModel,
                     );
