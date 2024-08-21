@@ -22,7 +22,7 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     });
     return orders;
   }
-  
+
   @override
   Future<void> deleteOrder(num orderId) {
     return FirebaseFirestore.instance

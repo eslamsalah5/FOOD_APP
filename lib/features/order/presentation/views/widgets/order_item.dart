@@ -22,7 +22,6 @@ class OrderItem extends StatelessWidget {
           key: Key("${order.id}"),
           onDismissed: (direction) {
             BlocProvider.of<OrderCubit>(context).deleteOrder(orderId: order.id);
-            BlocProvider.of<OrderCubit>(context).fetchOrders();
           },
           direction: DismissDirection.endToStart,
           background: Container(

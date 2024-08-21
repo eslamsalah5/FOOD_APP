@@ -21,19 +21,19 @@ class OrderRepoImpl implements OrderRepo {
       return left(ServerFailure('No Orders Found'));
     }
   }
-  
+
   @override
-  Future<Either<Failures, void>> deleteOrder({required num orderId}) async{
+  Future<Either<Failures, void>> deleteOrder({required num orderId}) async {
     try {
-  await orderRemoteDataSource.deleteOrder(orderId);
-  
-  return right(null);
-}  catch (e) {
-  return left(
-    ServerFailure(
-      e.toString(),
-    ),
-  );
-}
+      await orderRemoteDataSource.deleteOrder(orderId);
+
+      return right(null);
+    } catch (e) {
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
   }
 }

@@ -6,6 +6,7 @@ class OrderModel {
   final num rating;
   final num total;
   final num id;
+  final String? currency;
 
   const OrderModel({
     required this.image,
@@ -15,6 +16,7 @@ class OrderModel {
     required this.rating,
     required this.total,
     required this.id,
+    this.currency,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class OrderModel {
       rating: json['rating'],
       total: json['total'],
       id: json['id'],
+      currency: json['currency'],
     );
   }
 
@@ -38,6 +41,7 @@ class OrderModel {
     data['rating'] = this.rating;
     data['total'] = this.total;
     data['id'] = this.id;
+    data['currency'] = this.currency;
     return data;
   }
 }

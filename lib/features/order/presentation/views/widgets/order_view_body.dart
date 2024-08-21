@@ -23,79 +23,65 @@ class OrderViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => OrderCubit(
-        getIt.get<OrderRepoImpl>(),
-      )..fetchOrders(),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: 24.0, vertical: 16),
-          child: SafeArea(
-            child: Column(
-              children: [
-                CustomAppBar(),
-                SizedBox(
-                  height: 24,
-                ),
-                OrderItemListViewBlocProvider(),
-                SizedBox(
-                  height: 36,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color: Color(0xffFFB01D),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: 24.0, vertical: 16),
+        child: SafeArea(
+          child: Column(
+            children: [
+              CustomAppBar(),
+              SizedBox(
+                height: 24,
+              ),
+              OrderItemListViewBlocProvider(),
+              SizedBox(
+                height: 36,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: Color(0xffFFB01D),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    'Add more food to order',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFFFFB01D),
+                      fontSize: 16,
+                      fontFamily: 'Mulish',
+                      fontWeight: FontWeight.w600,
                     ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      'Add more food to order',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFFFFB01D),
-                        fontSize: 16,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                BlocBuilder<OrderCubit, OrderState>(
-                  builder: (context, state) {
-                    if (state is OrderSuccess) {
-                      List<OrderModel> orders = state.orders;
-
-                      // Calculate total price
-                      double totalPrice = 0;
-
-                      totalPrice = orders.fold(
-                          0,
-                          (previousValue, order) =>
-                              previousValue + order.total);
-
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(FirebaseAuth.instance.currentUser!.uid)
-                          .update({'totalPrice': totalPrice});
-                      return Text(
-                        'Total : ${totalPrice.toStringAsFixed(2)}', // يمكنك تنسيق العرض حسب الحاجة هنا
-                        style: TextStyle(
-                          color: Color(0xFF1D1E2C),
-                          fontSize: 16,
-                          fontFamily: 'Mulish',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      );
-                    }
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              BlocBuilder<OrderCubit, OrderState>(
+                builder: (context, state) {
+                  if (state is OrderSuccess) {
+                    List<OrderModel> orders = state.orders;
+    
+                    // Calculate total price
+                    double totalPrice = 0;
+    
+                    totalPrice = orders.fold(
+                        0,
+                        (previousValue, order) =>
+                            previousValue + order.total);
+    
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .update({'totalPrice': totalPrice});
                     return Text(
-                      'Total : ',
+                      'Total : ${totalPrice.toStringAsFixed(2)}', // يمكنك تنسيق العرض حسب الحاجة هنا
                       style: TextStyle(
                         color: Color(0xFF1D1E2C),
                         fontSize: 16,
@@ -103,29 +89,30 @@ class OrderViewBody extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     );
-                  },
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                myButton(
-                  onTap: () {
-                    showModalBottomSheet(
-                        context: context,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
-                        builder: (context) {
-                          return BlocProvider(
-                            create: (context) =>
-                                PaymentCubit(PaymentRepoImpl()),
-                            child: const PaymentMethodsBottomSheet(),
-                          );
-                        });
-                  },
-                  text: 'Continue payment',
-                ),
-              ],
-            ),
+                  }
+                  return Container();
+                },
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              myButton(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      builder: (context) {
+                        return BlocProvider(
+                          create: (context) =>
+                              PaymentCubit(PaymentRepoImpl()),
+                          child: const PaymentMethodsBottomSheet(),
+                        );
+                      });
+                },
+                text: 'Continue payment',
+              ),
+            ],
           ),
         ),
       ),

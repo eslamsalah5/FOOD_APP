@@ -10,12 +10,15 @@ class OrderCubit extends Cubit<OrderState> {
 
   final OrderRepo orderRepo;
 
+ late List<OrderModel> ordersList = [];
+
   Future<void> fetchOrders() async {
     emit(OrderLoading());
     final orders = await orderRepo.fetchOrders();
     orders.fold((failure) {
       emit(OrderError(message: failure.errorMessage));
     }, (orders) {
+      ordersList = orders;
       emit(OrderSuccess(orders: orders));
     });
   }
@@ -27,6 +30,7 @@ class OrderCubit extends Cubit<OrderState> {
       emit(DeleteOrderError(message: failure.errorMessage));
     }, (orders) {
       emit(DeleteOrderSuccess());
+      fetchOrders();
     });
   }
 }

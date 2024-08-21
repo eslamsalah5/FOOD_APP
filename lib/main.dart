@@ -19,6 +19,8 @@ import 'package:food_app/features/home/presentation/mangers/fetch_beef_food_cubi
 import 'package:food_app/features/home/presentation/mangers/fetch_break_fast_food/fetch_break_fast_food_cubit.dart';
 import 'package:food_app/features/home/presentation/mangers/fetch_categories_cubit/fetch_categories_cubit.dart';
 import 'package:food_app/features/home/presentation/mangers/fetch_popular_food_cubit/fetch_popular_food_cubit.dart';
+import 'package:food_app/features/order/data/repos/order_repo_impl.dart';
+import 'package:food_app/features/order/presentation/mangers/order_cubit/order_cubit.dart';
 import 'package:food_app/features/views/onboarding_view/onboarding_view.dart';
 import 'package:food_app/features/register/presentation/register_cubit/register_cubit.dart';
 import 'package:food_app/features/views/splash_view/splash_view.dart';
@@ -92,6 +94,11 @@ class MyApp extends StatelessWidget {
             create: (context) => FetchBeefFoodCubit(
               getIt.get<HomeRepoImpl>(),
             )..fetchBeefFood(),
+          ),
+          BlocProvider(
+               create: (context) => OrderCubit(
+        getIt.get<OrderRepoImpl>(),
+      )..fetchOrders(),
           ),
         ],
         child: MaterialApp(
