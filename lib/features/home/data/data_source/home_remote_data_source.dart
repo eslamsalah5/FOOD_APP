@@ -121,6 +121,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         'total': foodEntitie.price * foodEntitie.number,
         'rating': foodEntitie.Rating,
         'id': foodEntitie.foodId,
+        'currency': 'USD',
       });
     } on Exception catch (e) {
       print(e.toString());

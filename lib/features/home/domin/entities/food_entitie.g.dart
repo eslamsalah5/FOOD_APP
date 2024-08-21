@@ -29,14 +29,14 @@ class FoodEntitieAdapter extends TypeAdapter<FoodEntitie> {
       fats: fields[9] as num,
       carbs: fields[10] as num,
       number: fields[11] as int,
-      foodId: fields[12] as num,
+      foodId: fields[12] as num?,
     );
   }
 
   @override
   void write(BinaryWriter writer, FoodEntitie obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.foodImage)
       ..writeByte(1)
@@ -60,7 +60,9 @@ class FoodEntitieAdapter extends TypeAdapter<FoodEntitie> {
       ..writeByte(10)
       ..write(obj.carbs)
       ..writeByte(11)
-      ..write(obj.number);
+      ..write(obj.number)
+      ..writeByte(12)
+      ..write(obj.foodId);
   }
 
   @override

@@ -1,4 +1,3 @@
-
 class InitPaymentInputModel {
   final String paymentIntentClientSecret;
   final String customerId;

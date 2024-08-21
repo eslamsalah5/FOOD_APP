@@ -5,8 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
+import 'package:food_app/core/utils/keys.dart';
 import 'package:food_app/core/widgets/nav_to.dart';
+import 'package:food_app/features/order/data/models/orders_model.dart';
 import 'package:food_app/features/order/data/models/payment_intent_input_model.dart';
+import 'package:food_app/features/order/presentation/mangers/order_cubit/order_cubit.dart';
 import 'package:food_app/features/order/presentation/mangers/payment_cubit/payment_cubit.dart';
 import 'package:food_app/features/order/presentation/views/widgets/payment_methods_list_view.dart';
 import 'package:food_app/features/thank_you/presentation/views/thank_you_view.dart';
@@ -57,21 +61,80 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
 
                     // تحويل السعر إلى سنت (مثلاً إذا كان بعملة USD)
                     int totalAmountInCents = (totalPrice).toInt();
-                    PaymentIntentInputModel paymentIntentInputModel =
-                        PaymentIntentInputModel(
-                      amount: '$totalAmountInCents',
-                      currency: 'USD',
-                      customerId: 'cus_Qh6vRVjmRDqzQD',
-                    );
-                    BlocProvider.of<PaymentCubit>(context).makePayment(
-                      paymentIntentInputModel: paymentIntentInputModel,
-                    );
+                    // PaymentIntentInputModel paymentIntentInputModel =
+                    //     PaymentIntentInputModel(
+                    //   amount: '$totalAmountInCents',
+                    //   currency: 'USD',
+                    //   customerId: 'cus_Qh6vRVjmRDqzQD',
+                    // );
+                    // BlocProvider.of<PaymentCubit>(context).makePayment(
+                    //   paymentIntentInputModel: paymentIntentInputModel,
+                    // );
+                    var orders =
+                        BlocProvider.of<OrderCubit>(context).ordersList;
+                    List<Map<String, dynamic>> items = [
+                      for (var order in orders)
+                        {
+                          "name": order.name,
+                          "quantity": order.quantity,
+                          "price": order.price,
+                          "currency": "USD",
+                        }
+                    ];
+                    paypalPayment(context, totalAmountInCents, items);
                   },
                   isLoading: state is PaymentLoading ? true : false,
                   text: 'Continue');
             },
           ),
         ],
+      ),
+    );
+  }
+
+  void paypalPayment(BuildContext context, int totalAmountInCents, List<Map<String, dynamic>> items) {
+     Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => PaypalCheckoutView(
+          sandboxMode: true,
+          clientId: Keys.clientId,
+          secretKey: Keys.secretKeyPaypal,
+          transactions: [
+            {
+              "amount": {
+                "total": '$totalAmountInCents',
+                "currency": "USD",
+                "details": {
+                  "subtotal": '$totalAmountInCents',
+                  "shipping": '0',
+                  "shipping_discount": 0
+                }
+              },
+              "description":
+                  "The payment transaction description.",
+              // "payment_options": {
+              //   "allowed_payment_method":
+              //       "INSTANT_FUNDING_SOURCE"
+              // },
+              "item_list": {
+                "items": items,
+              }
+            }
+          ],
+          note: "Contact us for any questions on your order.",
+          onSuccess: (Map params) async {
+            log("onSuccess: $params");
+            Navigator.pop(context);
+          },
+          onError: (error) {
+            log("onError: $error");
+            Navigator.pop(context);
+          },
+          onCancel: () {
+            print('cancelled:');
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }

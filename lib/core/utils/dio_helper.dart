@@ -15,16 +15,17 @@ class DioHelper {
       {required data,
       required String url,
       String? contentType,
-      Map<String,String>? headers,
+      Map<String, String>? headers,
       String? token}) async {
     var response = dio.post(
       url,
       data: data,
       options: Options(
         contentType: contentType,
-        headers: headers ?? {
-          'Authorization': 'Bearer $token',
-        },
+        headers: headers ??
+            {
+              'Authorization': 'Bearer $token',
+            },
       ),
     );
 

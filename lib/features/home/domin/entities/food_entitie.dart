@@ -29,7 +29,7 @@ class FoodEntitie extends HiveObject {
   @HiveField(11)
   int number;
   @HiveField(12)
-  final num foodId;
+  num? foodId;
 
   FoodEntitie({
     required this.foodImage,
