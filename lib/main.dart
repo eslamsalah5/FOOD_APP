@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,10 @@ void main() async {
   await Hive.openBox<FoodEntitie>(kBeefTitle);
   setupServiceLocator();
 
-  runApp(const MyApp());
+  runApp(DevicePreview(
+    builder: (context) => const MyApp(),
+    enabled: false,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -96,13 +100,15 @@ class MyApp extends StatelessWidget {
             )..fetchBeefFood(),
           ),
           BlocProvider(
-               create: (context) => OrderCubit(
-        getIt.get<OrderRepoImpl>(),
-      )..fetchOrders(),
+            create: (context) => OrderCubit(
+              getIt.get<OrderRepoImpl>(),
+            )..fetchOrders(),
           ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
           theme: ThemeData(
             useMaterial3: true,
             textTheme: GoogleFonts.mulishTextTheme(),

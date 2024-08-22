@@ -16,6 +16,7 @@ class AddOrderCubit extends Cubit<AddOrderState> {
     try {
       await homeRepo.AddOrder(foodEntitie);
       emit(AddOrderSuccess(foodEntitie));
+      
     } catch (e) {
       emit(AddOrderError(e.toString()));
     }

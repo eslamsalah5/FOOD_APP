@@ -41,7 +41,12 @@ class _FoodItemState extends State<FoodItem> {
         image: "assets/images/food_4.png", name: "Mac and Cheese", price: 51),
   ];
 
-  var addRequestController = TextEditingController();
+  late TextEditingController addRequestController;
+
+  initState() {
+    addRequestController = TextEditingController();
+    super.initState();
+  }
 
   @override
   void dispose() {

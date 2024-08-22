@@ -100,6 +100,7 @@ class _BuyFoodButtonState extends State<BuyFoodButton> {
                     onTap: () {
                       BlocProvider.of<AddOrderCubit>(context)
                           .addOrder(widget.food);
+                          
                       navTo(context, const OrderView());
                     },
                     child: Container(
