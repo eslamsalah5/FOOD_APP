@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:food_app/features/order/presentation/views/widgets/payment_method_item.dart';
 
 class PaymentMethodsListView extends StatefulWidget {
-  const PaymentMethodsListView({super.key});
+  const PaymentMethodsListView({super.key, required this.updatePaymentMethod});
+
+  final Function({required int index}) updatePaymentMethod;
 
   @override
   State<PaymentMethodsListView> createState() => _PaymentMethodsListViewState();
@@ -15,6 +17,8 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
   ];
 
   int activeIndex = 0;
+
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,6 +32,7 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
               child: GestureDetector(
                 onTap: () {
                   activeIndex = index;
+                  widget.updatePaymentMethod(index: index);
                   setState(() {});
                 },
                 child: PaymentMethodItem(

@@ -18,15 +18,26 @@ import 'package:food_app/features/order/presentation/views/widgets/payment_metho
 import 'package:food_app/features/thank_you/presentation/views/thank_you_view.dart';
 import 'package:food_app/shared/widgets/widget.dart';
 
-class OrderViewBody extends StatelessWidget {
+class OrderViewBody extends StatefulWidget {
   const OrderViewBody({super.key});
+
+  @override
+  State<OrderViewBody> createState() => _OrderViewBodyState();
+}
+
+class _OrderViewBodyState extends State<OrderViewBody> {
+  @override
+  void initState() {
+    context.read<OrderCubit>().fetchOrders();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: 24.0, vertical: 16),
+            horizontal: 16.0, vertical: 16),
         child: SafeArea(
           child: Column(
             children: [
@@ -67,15 +78,13 @@ class OrderViewBody extends StatelessWidget {
                 builder: (context, state) {
                   if (state is OrderSuccess) {
                     List<OrderModel> orders = state.orders;
-    
+
                     // Calculate total price
                     double totalPrice = 0;
-    
-                    totalPrice = orders.fold(
-                        0,
-                        (previousValue, order) =>
-                            previousValue + order.total);
-    
+
+                    totalPrice = orders.fold(0,
+                        (previousValue, order) => previousValue + order.total);
+
                     FirebaseFirestore.instance
                         .collection('users')
                         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -104,8 +113,7 @@ class OrderViewBody extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16)),
                       builder: (context) {
                         return BlocProvider(
-                          create: (context) =>
-                              PaymentCubit(PaymentRepoImpl()),
+                          create: (context) => PaymentCubit(PaymentRepoImpl()),
                           child: const PaymentMethodsBottomSheet(),
                         );
                       });

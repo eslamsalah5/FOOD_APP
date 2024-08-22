@@ -17,8 +17,23 @@ import 'package:food_app/features/thank_you/presentation/views/thank_you_view.da
 import 'package:food_app/features/thank_you/presentation/views/widgets/total_price_widget.dart';
 import 'package:food_app/shared/widgets/widget.dart';
 
-class PaymentMethodsBottomSheet extends StatelessWidget {
+class PaymentMethodsBottomSheet extends StatefulWidget {
   const PaymentMethodsBottomSheet({super.key});
+
+  @override
+  State<PaymentMethodsBottomSheet> createState() =>
+      _PaymentMethodsBottomSheetState();
+}
+
+class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
+  bool isPaypal = false;
+  updatePaymentMethod({required int index}) {
+    if (index == 0) {
+      isPaypal = false;
+    } else {
+      isPaypal = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +45,9 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          PaymentMethodsListView(),
+          PaymentMethodsListView(
+            updatePaymentMethod: updatePaymentMethod,
+          ),
           SizedBox(
             height: 32,
           ),
@@ -61,27 +78,23 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
 
                     // تحويل السعر إلى سنت (مثلاً إذا كان بعملة USD)
                     int totalAmountInCents = (totalPrice).toInt();
-                    // PaymentIntentInputModel paymentIntentInputModel =
-                    //     PaymentIntentInputModel(
-                    //   amount: '$totalAmountInCents',
-                    //   currency: 'USD',
-                    //   customerId: 'cus_Qh6vRVjmRDqzQD',
-                    // );
-                    // BlocProvider.of<PaymentCubit>(context).makePayment(
-                    //   paymentIntentInputModel: paymentIntentInputModel,
-                    // );
-                    var orders =
-                        BlocProvider.of<OrderCubit>(context).ordersList;
-                    List<Map<String, dynamic>> items = [
-                      for (var order in orders)
-                        {
-                          "name": order.name,
-                          "quantity": order.quantity,
-                          "price": order.price,
-                          "currency": "USD",
-                        }
-                    ];
-                    paypalPayment(context, totalAmountInCents, items);
+
+                    if (isPaypal) {
+                      var orders =
+                          BlocProvider.of<OrderCubit>(context).ordersList;
+                      List<Map<String, dynamic>> items = [
+                        for (var order in orders)
+                          {
+                            "name": order.name,
+                            "quantity": order.quantity,
+                            "price": order.price,
+                            "currency": "USD",
+                          }
+                      ];
+                      paypalPayment(context, totalAmountInCents, items);
+                    } else {
+                      stripePayment(totalAmountInCents, context);
+                    }
                   },
                   isLoading: state is PaymentLoading ? true : false,
                   text: 'Continue');
@@ -92,8 +105,20 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
     );
   }
 
-  void paypalPayment(BuildContext context, int totalAmountInCents, List<Map<String, dynamic>> items) {
-     Navigator.of(context).push(
+  void stripePayment(int totalAmountInCents, BuildContext context) {
+    PaymentIntentInputModel paymentIntentInputModel = PaymentIntentInputModel(
+      amount: '$totalAmountInCents',
+      currency: 'USD',
+      customerId: 'cus_Qh6vRVjmRDqzQD',
+    );
+    BlocProvider.of<PaymentCubit>(context).makePayment(
+      paymentIntentInputModel: paymentIntentInputModel,
+    );
+  }
+
+  void paypalPayment(BuildContext context, int totalAmountInCents,
+      List<Map<String, dynamic>> items) {
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => PaypalCheckoutView(
           sandboxMode: true,
@@ -110,8 +135,7 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
                   "shipping_discount": 0
                 }
               },
-              "description":
-                  "The payment transaction description.",
+              "description": "The payment transaction description.",
               // "payment_options": {
               //   "allowed_payment_method":
               //       "INSTANT_FUNDING_SOURCE"
