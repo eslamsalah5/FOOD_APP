@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/shared/widgets/widget.dart';
 import 'package:food_app/views/get_start_view/get_start_view.dart';
 
-class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key});
+class OnBoardingViewBody extends StatelessWidget {
+  const OnBoardingViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -21,13 +21,29 @@ class RegisterViewBody extends StatefulWidget {
 class _RegisterViewBodyState extends State<RegisterViewBody> {
   var formKey = GlobalKey<FormState>();
 
-  var userNameController = TextEditingController();
+  late TextEditingController userNameController;
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+  late TextEditingController phoneController;
 
-  var emailController = TextEditingController();
+  @override
+  void initState() {
+    userNameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    phoneController = TextEditingController();
+    super.initState();
+  }
 
-  var passwordController = TextEditingController();
-
-  var phoneController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    userNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    phoneController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/views/onboarding_view/home_view.dart';
+import 'package:food_app/views/onboarding_view/on_boarding_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -17,7 +17,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   void _initializeApp() async {
     await Future.delayed(const Duration(seconds: 3));
-    Navigator.of(context).pushReplacementNamed(HomeView.pageID);
+    Navigator.of(context).pushReplacementNamed(OnBoardingView.pageID);
   }
 
   @override

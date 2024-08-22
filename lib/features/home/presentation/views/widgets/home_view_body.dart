@@ -20,7 +20,13 @@ import 'package:food_app/wrapper.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
-
+  final List<String> categories = const [
+    'All Dishes',
+    'Most Popular',
+    'Breakfast',
+    'Appetizers & Snacks',
+    'Beef',
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -66,6 +72,42 @@ class HomeViewBody extends StatelessWidget {
               ),
             ),
           ),
+          // SliverToBoxAdapter(
+          //   child: SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Row(
+          //       children: categories
+          //           .map(
+          //             (e) => Container(
+          //               height: 50,
+          //               decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(20),
+          //                 // Creates border
+          //                 color: Color(0xffFFB01D),
+          //               ),
+          //               margin: EdgeInsetsDirectional.only(
+          //                 start: 20,
+          //               ),
+          //               padding: EdgeInsetsDirectional.only(
+          //                 start: 12,
+          //                 end: 12,
+          //               ),
+          //               child: Center(
+          //                 child: Text(
+          //                   categories[categories.indexOf(e)],
+          //                   style: TextStyle(
+          //                       fontSize: 16,
+          //                       fontFamily: 'Mulish',
+          //                       fontWeight: FontWeight.w700,
+          //                       color: Colors.white),
+          //                 ),
+          //               ),
+          //             ),
+          //           )
+          //           .toList(),
+          //     ),
+          //   ),
+          // ),
           SliverFillRemaining(
             child: const CategoryTabs(),
           ),
