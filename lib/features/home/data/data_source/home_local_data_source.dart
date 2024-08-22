@@ -19,6 +19,7 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
     return categories;
   }
 
+//fetchPopularFood
   @override
   List<FoodEntitie> fetchPopularFood() {
     List<FoodEntitie> popularFood =
