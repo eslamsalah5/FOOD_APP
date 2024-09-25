@@ -101,7 +101,7 @@ class FoodModel extends FoodEntitie {
             carbs: carbohydratesInGrams ?? 0,
             description: recipe,
             kCal: calories ?? 0,
-            grams: Random().nextInt(200) + 50,
+            grams: (carbohydratesInGrams ?? 0) + (fatInGrams ?? 0) + (proteinInGrams ?? 0),
             ingredients: [
               ingredient1 ?? '',
               ingredient2 ?? '',
