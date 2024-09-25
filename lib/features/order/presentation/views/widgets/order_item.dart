@@ -174,7 +174,15 @@ class OrderItem extends StatelessWidget {
                 Column(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (order.quantity > 1) {
+                            BlocProvider.of<OrderCubit>(context)
+                                .decreaseOrderQuantity(orderModel: order);
+                          } else {
+                            BlocProvider.of<OrderCubit>(context)
+                                .deleteOrder(orderId: order.id);
+                          }
+                        },
                         icon: const Icon(
                           Icons.remove_circle,
                           color: Color(
@@ -184,7 +192,10 @@ class OrderItem extends StatelessWidget {
                         )),
                     Text('${order.quantity}'),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        BlocProvider.of<OrderCubit>(context)
+                            .increaseOrderQuantity(orderModel: order);
+                      },
                       icon: const Icon(
                         Icons.add_circle,
                         color: Color(0xFFFF7B2C),

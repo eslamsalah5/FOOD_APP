@@ -6,12 +6,7 @@ import 'package:food_app/features/home/presentation/mangers/fetch_break_fast_foo
 import 'package:food_app/features/home/presentation/mangers/fetch_categories_cubit/fetch_categories_cubit.dart';
 import 'package:food_app/features/home/presentation/mangers/fetch_popular_food_cubit/fetch_popular_food_cubit.dart';
 import 'package:food_app/features/home/presentation/views/widgets/all_dishes.dart';
-import 'package:food_app/features/home/presentation/views/widgets/appetizer_section.dart';
-import 'package:food_app/features/home/presentation/views/widgets/beef_section.dart';
-import 'package:food_app/features/home/presentation/views/widgets/break_fast_section.dart';
 import 'package:food_app/features/home/presentation/views/widgets/food_gird.dart';
-import 'package:food_app/features/home/presentation/views/widgets/foods_list_view.dart';
-import 'package:food_app/features/home/presentation/views/widgets/most_popular_section.dart';
 
 class CategoryTabs extends StatelessWidget {
   const CategoryTabs({super.key});
@@ -27,6 +22,7 @@ class CategoryTabs extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TabBar(
+                  
                     isScrollable: true,
                     labelColor: Colors.white,
                     unselectedLabelColor: Color(0xff666687),

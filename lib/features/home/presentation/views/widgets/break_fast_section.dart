@@ -6,23 +6,27 @@ class BreakFastSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'BreakFast',
-          style: TextStyle(
-            color: Color(0xFF666687),
-            fontSize: 16,
-            fontFamily: 'Mulish',
-            fontWeight: FontWeight.w600,
+    return Padding(
+     padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'BreakFast',
+            style: TextStyle(
+              color: Color(0xFF666687),
+              fontSize: 16,
+              fontFamily: 'Mulish',
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        BreakFastFoodListViewBlocBuilder(),
-      ],
+          SizedBox(
+            height: 20,
+          ),
+          BreakFastFoodListViewBlocBuilder(),
+            SizedBox(height: 20),
+        ],
+      ),
     );
   }
 }

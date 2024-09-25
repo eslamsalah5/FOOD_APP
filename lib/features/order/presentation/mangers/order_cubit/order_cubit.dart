@@ -33,4 +33,27 @@ class OrderCubit extends Cubit<OrderState> {
       fetchOrders();
     });
   }
+
+  Future<void> decreaseOrderQuantity({required OrderModel orderModel}) async {
+    emit(DecreaseOrderQuantityLoading());
+    final orders = await orderRepo.decreaseOrderQuantity(orderModel: orderModel);
+    orders.fold((failure) {
+      emit(DecreaseOrderQuantityError(message: failure.errorMessage));
+    }, (orders) {
+      emit(DecreaseOrderQuantitySuccess());
+      fetchOrders();
+    });
+  }
+
+  Future<void> increaseOrderQuantity({required OrderModel orderModel}) async {
+    emit(IncreaseOrderQuantityLoading());
+    final orders = await orderRepo.increaseOrderQuantity(orderModel: orderModel);
+    orders.fold((failure) {
+      emit(IncreaseOrderQuantityError(message: failure.errorMessage));
+    }, (orders) {
+      emit(IncreaseOrderQuantitySuccess());
+      fetchOrders();
+    });
+  }
 }
+
