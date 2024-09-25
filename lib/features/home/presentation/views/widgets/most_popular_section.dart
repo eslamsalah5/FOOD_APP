@@ -8,23 +8,27 @@ class MostPopularSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Most Popular',
-          style: TextStyle(
-            color: Color(0xFF666687),
-            fontSize: 16,
-            fontFamily: 'Mulish',
-            fontWeight: FontWeight.w600,
+    return Padding(
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Most Popular',
+            style: TextStyle(
+              color: Color(0xFF666687),
+              fontSize: 16,
+              fontFamily: 'Mulish',
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        MostPopularFoodListViewBlocBuilder(),
-      ],
+          SizedBox(
+            height: 20,
+          ),
+          MostPopularFoodListViewBlocBuilder(),
+            SizedBox(height: 20),
+        ],
+      ),
     );
   }
 }

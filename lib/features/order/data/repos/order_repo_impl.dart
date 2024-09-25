@@ -36,4 +36,34 @@ class OrderRepoImpl implements OrderRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failures, void>> decreaseOrderQuantity(
+      {required OrderModel orderModel}) async {
+    try {
+      await orderRemoteDataSource.decreaseOrderQuantity(orderModel);
+      return right(null);
+    } catch (e) {
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failures, void>> increaseOrderQuantity(
+      {required OrderModel orderModel}) async {
+    try {
+      await orderRemoteDataSource.increaseOrderQuantity(orderModel);
+      return right(null);
+    } catch (e) {
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
 }

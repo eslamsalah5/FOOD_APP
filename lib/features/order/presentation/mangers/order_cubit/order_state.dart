@@ -28,3 +28,23 @@ final class DeleteOrderError extends OrderState {
 
   DeleteOrderError({required this.message});
 }
+
+final class DecreaseOrderQuantityLoading extends OrderState {}
+
+final class DecreaseOrderQuantitySuccess extends OrderState {}
+
+final class DecreaseOrderQuantityError extends OrderState {
+  final String message;
+
+  DecreaseOrderQuantityError({required this.message});
+}
+
+final class IncreaseOrderQuantityLoading extends OrderState {}
+
+final class IncreaseOrderQuantitySuccess extends OrderState {}
+
+final class IncreaseOrderQuantityError extends OrderState {
+  final String message;
+
+  IncreaseOrderQuantityError({required this.message});
+}

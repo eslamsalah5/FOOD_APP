@@ -13,15 +13,18 @@ class AllDishes extends StatelessWidget {
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: 20,
       ),
-      child: ListView(children: [
-        MostPopularSection(),
-        SizedBox(height: 20),
-        BreakFastSection(),
-        SizedBox(height: 20),
-        AppetizerSection(),
-        SizedBox(height: 20),
-        BeefSection(),
-      ]),
+      child: ListView(
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          MostPopularSection(),
+        
+          BreakFastSection(),
+        
+          AppetizerSection(),
+        
+          BeefSection(),
+        ],
+      ),
     );
   }
 }

@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_app/features/home/domin/entities/food_entitie.dart';
 import 'package:food_app/models/add_topping_model.dart';
-import 'package:food_app/models/ingredients_model.dart';
 import 'package:food_app/models/recommended_side_model.dart';
 import 'package:food_app/features/home/presentation/views/widgets/food_bottom_sheet/food_bottom_sheet.dart';
-import 'package:food_app/features/order/presentation/views/order_view.dart';
 
 class FoodItem extends StatefulWidget {
   final FoodEntitie food;
@@ -92,12 +90,6 @@ class _FoodItemState extends State<FoodItem> {
                   fit: BoxFit.fill,
                   errorWidget: (context, url, error) =>
                       const Icon(Icons.error_outline_outlined),
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                    child: CircularProgressIndicator(
-                      value: downloadProgress.progress,
-                    ),
-                  ),
                 ),
                 SizedBox(
                   height: 4,
