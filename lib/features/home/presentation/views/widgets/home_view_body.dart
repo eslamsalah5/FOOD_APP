@@ -11,7 +11,7 @@ import 'package:food_app/features/home/presentation/views/widgets/beef_section.d
 import 'package:food_app/features/home/presentation/views/widgets/break_fast_section.dart';
 import 'package:food_app/features/home/presentation/views/widgets/category_list.dart';
 import 'package:food_app/features/home/presentation/views/widgets/most_popular_section.dart';
-import 'package:food_app/features/home/presentation/views/widgets/search_container.dart';
+import 'package:food_app/features/search/presentation/views/widgets/search_container.dart';
 import 'package:food_app/features/views/get_start_view/get_start_view.dart';
 
 class HomeViewBody extends StatelessWidget {
