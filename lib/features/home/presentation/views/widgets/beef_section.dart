@@ -9,7 +9,7 @@ class BeefSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
+      padding: const EdgeInsetsDirectional.only(start: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

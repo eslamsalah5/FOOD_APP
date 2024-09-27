@@ -5,6 +5,8 @@ import 'package:food_app/features/home/data/data_source/home_remote_data_source.
 import 'package:food_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:food_app/features/order/data/data_source/order_remote_data_source.dart';
 import 'package:food_app/features/order/data/repos/order_repo_impl.dart';
+import 'package:food_app/features/search/data/data_source/search_remote_data_source.dart';
+import 'package:food_app/features/search/data/repos/search_repo_impl.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -28,5 +30,12 @@ void setupServiceLocator() {
     OrderRepoImpl(
       orderRemoteDataSource: OrderRemoteDataSourceImpl(),
     ),
+  );
+
+  getIt.registerSingleton<SearchRepoImpl>(
+    SearchRepoImpl(
+        searchRemoteDataSource: SearchRemoteDataSourceImpl(
+      getIt.get<DioHelper>(),
+    )),
   );
 }

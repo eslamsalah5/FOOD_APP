@@ -12,7 +12,7 @@ class FoodGird extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 1,
           mainAxisSpacing: 12,
           crossAxisSpacing: 8,
         ),
